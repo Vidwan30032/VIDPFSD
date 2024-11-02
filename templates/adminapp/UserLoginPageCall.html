@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'Navbar/ProjectNavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+{% block body %}
+    <div class="container">
+        <h2>Login Page</h2>
+        <form method="post" action="{% url 'UserLoginLogic' %}">
+            {% csrf_token %}
+            <div class="input-name">
+                <i class="fa fa-user-o"></i>
+                <input type="text" placeholder="Username" class="name" name="username">
+            </div>
+
+            <div class="input-name">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type="password" placeholder="Password" class="name" name="password">
+            </div>
+
+            <div class="input-name">
+                <input type="submit" class="button" value="Login">
+            </div>
+        </form>
+    </div>
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
+</body>
+</html>
